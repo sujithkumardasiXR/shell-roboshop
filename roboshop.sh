@@ -2,6 +2,8 @@
 
 SG_ID='sg-0863830c1c1ca306a'
 AMI_ID='ami-0055977a6e828a4f4'
+ZONE_ID="Z0931213C33ZN4N3O896"
+DOMAIN_NAME="shinoys.online"
 
 for instance in $@
    do
@@ -21,7 +23,7 @@ for instance in $@
             --query 'Reservations[].Instances[].PublicIpAddress' \
             --output text
         )
-        RECORD_NAME="$shinoys.online" # daws88s.online
+        RECORD_NAME="$DOMAIN_NAME" # daws88s.online
     else
         IP=$(
             aws ec2 describe-instances \
@@ -29,7 +31,7 @@ for instance in $@
             --query 'Reservations[].Instances[].PrivateIpAddress' \
             --output text
         )
-        RECORD_NAME="$instance.$shinoys.online" # mongodb.daws88s.online
+        RECORD_NAME="$instance.$DOMAIN_NAME" # mongodb.daws88s.online
     fi
 
     echo "IP Address: $IP"
